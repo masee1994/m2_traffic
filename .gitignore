@@ -1,0 +1,9 @@
+# IntelliJ IDEA 설정 파일 및 디렉토리 제외
+.idea/
+*.iml
+
+# target 디렉토리 제외
+target/
+
+# VS Code 설정 디렉토리 제외
+.vscode/
