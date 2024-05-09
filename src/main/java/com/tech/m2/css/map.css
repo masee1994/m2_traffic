@@ -1,0 +1,193 @@
+.map-right-box {
+}
+
+.map-right-box .map-type {
+    position: absolute;
+    right: 15px;
+    margin-top: 15px;
+}
+
+.map-right-box .map-type div {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.map-right-box .map-type a {
+    float: left;
+    width: 76px;
+    height: 69px;
+    cursor: pointer;
+    z-index: 7000;
+}
+
+/*.map-right-box .map-type .map-type-01 {*/
+/*    background: url('/images/main/map01_off.png');*/
+/*}*/
+
+/*.map-right-box .map-type .map-type-02 {*/
+/*    background: url('/images/main/roadview_off.png');*/
+/*}*/
+
+/*.map-right-box .map-type .map-type-03 {*/
+/*    background: url('/images/main/map03_off.png');*/
+/*}*/
+
+/*.map-right-box .map-type .map-type-99 {*/
+/*    background: url('/images/main/map04_off.png');*/
+/*}*/
+
+/*.map-right-box .map-type .map-type-01.active {*/
+/*    background: url('/images/main/map01_on.png');*/
+/*}*/
+
+/*.map-right-box .map-type .map-type-02.active {*/
+/*    background: url('/images/main/roadview_on.png');*/
+/*}*/
+
+/*.map-right-box .map-type .map-type-03.active {*/
+/*    background: url('/images/main/map03_on.png');*/
+/*}*/
+
+/*.map-right-box .map-type .map-type-99.active {*/
+/*    background: url('/images/main/map04_on.png');*/
+/*}*/
+
+.map-right-box .map-type .map-type-04 {
+    border: 2px solid #0375f4;
+    background-color: #fff;
+    vertical-align: middle;
+    padding-top: 10px;
+    font-weight: bold;
+    width: 70px;
+    height: 70px;
+    display: block;
+    border-radius: 35px;
+    margin-top: 0px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.map-right-box .map-icon-menu {
+    position: absolute;
+    right: 15px;
+    margin-top: 16px;
+    z-index: 4000;
+}
+
+.map-right-box .map-icon-menu .icon-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.map-right-box .map-icon-menu .icon-menu a {
+    padding: 5px;
+    width: 50px;
+    height: 49px;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    display: block;
+    cursor: pointer;
+}
+
+.map-right-box .map-icon-menu .icon-menu a.borderT {
+    border-top: 1px solid #ccc;
+}
+
+/*.map-right-box .map-icon-menu .icon-menu .m-ar {*/
+/*    background: url('/images/main/bottom_more.png');*/
+/*    border: 1px solid #cccccc;*/
+/*    height: 26px;*/
+/*}*/
+
+/*.map-right-box .map-icon-menu .icon-menu .m-ar-close {*/
+/*    background: url('/images/main/bottom_more02.png');*/
+/*    border: 1px solid #cccccc;*/
+/*    height: 26px;*/
+/*}*/
+
+.map-right-box .map-zoom-slider {
+    position: absolute;
+    right: 15px;
+    margin-top: 200px;
+    z-index: 2000;
+    width: 50px;
+    text-align: center;
+}
+
+.map-right-box .range-plus {
+    border: 1px solid #ddd;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.map-right-box .range-minus {
+    border: 1px solid #ddd;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.map-right-box .input-range {
+    -webkit-appearance: none;
+    height: 100px;
+    border-radius: 5px;
+    background: #ccc;
+    outline: none;
+    /* writing-mode: bt-lr; */
+    /* IE */
+    -webkit-appearance: slider-vertical;
+    /* WebKit */
+}
+
+/* // Firefox Overrides */
+.map-right-box ::-moz-range-track {
+    background: #ccc;
+    border: 0;
+}
+
+.map-right-box input::-moz-focus-inner {
+    border: 0;
+}
+
+.map-right-box .map-legend {
+    border-radius: 3px;
+    position: absolute;
+    right: 15px;
+    margin-top: 529px;
+    z-index: 2000;
+    width: 88px;
+    padding: 3px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.map-right-box .map-legend span.txt {
+    float: left;
+    display: inline-block;
+    font-size: 16px;
+    width: 54px;
+    height: 26px;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 2px;
+}
+
+/*.map-right-box .map-legend span.icon {*/
+/*    float: left;*/
+/*    display: inline-block;*/
+/*    width: 26px;*/
+/*    height: 26px;*/
+/*    background: url('/images/main/icon-plus.png');*/
+/*}*/
+
+/*.map-right-box .map-legend span.active {*/
+/*    float: left;*/
+/*    display: inline-block;*/
+/*    width: 26px;*/
+/*    height: 26px;*/
+/*    background: url('/images/main/icon-minus.png');*/
+/*}*/

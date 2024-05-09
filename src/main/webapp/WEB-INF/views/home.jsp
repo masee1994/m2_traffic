@@ -12,5 +12,13 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+<a href="test">test</a>
+
+<c:forEach items="${info}" var="dao">
+	<div>${dao.spot_num}</div>
+	<div>${dao.spot_nm}</div>
+	<div>${dao.grs80tm_x}</div>
+	<div>${dao.grs80tm_y}</div>
+</c:forEach>
 </body>
 </html>
