@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import com.tech.m2.dto.Traffic_RoadInfoDto;
 import com.tech.m2.dto.Traffic_SpotInfoDto;
 import com.tech.m2.service.MapService;
 import com.tech.m2.serviceInter.MapServiceInter;
@@ -44,10 +45,14 @@ public class HomeController {
 	@RequestMapping(value = "test", method = RequestMethod.GET)
 	public String test(Model model) {
 		MapServiceInter service = new MapService();
-		ArrayList<Traffic_SpotInfoDto> info = new ArrayList<>();
 		XmlPaser xmlPaser = new XmlPaser();
-		info = xmlPaser.spotInfo_Parsing(Seoul_traffic_api.traffic_API("SpotInfo",1,1000));
-		model.addAttribute("info", info);
+
+//		ArrayList<Traffic_RoadInfoDto> road_info = Seoul_traffic_api.traffic_API("RoadInfo",1,1000,02);
+
+
+//		ArrayList<Traffic_SpotInfoDto> info = new ArrayList<>();
+//		info = xmlPaser.spotInfo_Parsing(Seoul_traffic_api.traffic_API("SpotInfo",1,1000));
+//		model.addAttribute("info", info);
 		return "test";
 	}
 	

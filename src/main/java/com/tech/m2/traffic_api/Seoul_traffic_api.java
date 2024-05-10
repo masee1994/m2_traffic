@@ -26,13 +26,14 @@ public class Seoul_traffic_api {
         return null;
     }
 
-    public static String traffic_API(String service, int start_index, int end_index, int date) {
+    public static String traffic_API(String service, int start_index, int end_index, int value) {
         try {
             StringBuilder urlBuilder = new StringBuilder("http://openapi.seoul.go.kr:8088"); /*URL*/
             urlBuilder.append("/" + api_Key); /*Service Key*/
             urlBuilder.append("/" + URLEncoder.encode("xml", "UTF-8"));
             urlBuilder.append("/" + start_index);
             urlBuilder.append("/" + end_index);
+            urlBuilder.append("/" + value);
             String xml_code = urlConnection(urlBuilder);
             ;
             return xml_code;

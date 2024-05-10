@@ -1,6 +1,25 @@
 package com.tech.m2.dto;
 
 public class Traffic_SpotInfoDto {
+
+
+    /*<row>
+        <road_div_cd>02</road_div_cd>
+        <road_div_nm>도시고속도로</road_div_nm>
+    </row>
+    <row>
+        <road_div_cd>03</road_div_cd>
+        <road_div_nm>주간선도로</road_div_nm>
+    </row>
+    <row>
+        <road_div_cd>04</road_div_cd>
+        <road_div_nm>보조간선도로</road_div_nm>
+    </row>
+    <row>
+        <road_div_cd>05</road_div_cd>
+        <road_div_nm>기타도로</road_div_nm>
+    </row>*/
+
     private int chk = 0;
     private String spot_num = "null";
     private String spot_nm = "null";

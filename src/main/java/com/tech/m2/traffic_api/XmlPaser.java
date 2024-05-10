@@ -20,8 +20,8 @@ import java.io.StringReader;
 import java.util.ArrayList;
 
 public class XmlPaser {
-    public ArrayList<Traffic_SpotInfoDto> spotInfo_Parsing(String data) {
-        ArrayList<Traffic_SpotInfoDto> info = new ArrayList<>();
+    private ArrayList<Object> spotInfo_Parsing(String data,Object object) {
+        ArrayList<Object> dtos = new ArrayList<>();
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -36,9 +36,11 @@ public class XmlPaser {
 
                 NodeList rows = doc.getElementsByTagName("row");
 
+
                 for (int i = 0; i < rows.getLength(); i++) {
                     Node row = rows.item(i);
                     Traffic_SpotInfoDto dto = new Traffic_SpotInfoDto();
+
                     if (row.getNodeType() == Node.ELEMENT_NODE) {
                         Element element = (Element) row;
                         Traffic_SpotInfoDto traffic_spotInfo = new Traffic_SpotInfoDto();
@@ -50,34 +52,31 @@ public class XmlPaser {
                         System.out.print(", spot_nm = " + spot_nm);
                         System.out.print(", grs_x = " + grs_x);
                         System.out.println(", grs_y = " + grs_y);
-                        DestPositonDto trans_pos = getdestPosition(grs_x,grs_y);
+                        DestPositonDto trans_pos = trans_destPosition(grs_x,grs_y);
                         System.out.println(trans_pos.getLatitude()+" 위도경도 "+trans_pos.getLongitude());
                         dto.setChk(1);
                         dto.setSpot_num(spot_num);
                         dto.setSpot_nm(spot_nm);
                         dto.setdPx_longitude(Double.toString(trans_pos.getLongitude()));
                         dto.setdPy_latitude(Double.toString(trans_pos.getLatitude()));
-                        info.add(dto);
+                        dtos.add(dto);
                     }
                 }
 
             } else if (result_code != null && result_code.equals("INFO-200")) {
-                Traffic_SpotInfoDto dao = new Traffic_SpotInfoDto();
-                info.add(dao);
+                System.out.println("api호출값이 null입니다.");
             } else {
-                Traffic_SpotInfoDto dao = new Traffic_SpotInfoDto();
-                dao.setChk(-1);
-                info.add(dao);
+                System.out.println("api호출과정에서 문제가 발생했습니다.");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (info.get(0).getChk() == -1) {
-            System.out.println("api호출과정에서 문제가 발생했습니다.");
-        } else if (info.get(0).getChk() == 0) {
-            System.out.println("api호출값이 null입니다.");
-        }
-        return info;
+//        if (dtos.get(0).getChk() == -1) {
+//            System.out.println("api호출과정에서 문제가 발생했습니다.");
+//        } else if (dtos.get(0).getChk() == 0) {
+//            System.out.println("api호출값이 null입니다.");
+//        }
+        return dtos;
     }
 
     private static String getElementValue(Element parentElement, String tagName) {
@@ -91,7 +90,7 @@ public class XmlPaser {
         return null;
     }
 
-    private static DestPositonDto getdestPosition(String grs80tm_x, String grs80tm_y) {
+    private static DestPositonDto trans_destPosition(String grs80tm_x, String grs80tm_y) {
         DestPositonDto dto = new DestPositonDto();
         try {
             // 문자열을 double로 변환
