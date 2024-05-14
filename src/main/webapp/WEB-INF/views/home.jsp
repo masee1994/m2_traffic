@@ -473,7 +473,7 @@
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary"></h6>
-                                    <jsp:include page="test.jsp" flush="false"/>
+                                    <jsp:include page="test2.jsp" flush="false"/>
                                     <!-- <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
