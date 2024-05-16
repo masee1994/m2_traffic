@@ -12,7 +12,7 @@
 <style>
     #map { position: relative; width: 100%; height: 600px; }
     .control { position: absolute; top: 10px; right: 10px; z-index: 5; }
-    .button { padding: 5px 10px; background-color: white; border: 1px solid black; cursor: pointer; }
+    .button { padding: 5px 10px; background-color: white; border: 1px solid black; cursor: pointer; border-radius: 6px; }
     .button:hover { background-color: #f8f8f8; }
 </style>
 <script type="text/javascript">
