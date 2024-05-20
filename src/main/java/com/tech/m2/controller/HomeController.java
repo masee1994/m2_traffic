@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Handles requests for the application home page.
@@ -57,15 +58,24 @@ public class HomeController {
 		return "test";
 	}
 
-	@RequestMapping(value = "test2", method = RequestMethod.GET)
-	public String test2(Model model) {
+//	@RequestMapping(value = "test2", method = RequestMethod.GET)
+//	public String test2(Model model) {
+//		MapServiceInter service = new MapService();
+//		XmlPaser xmlPaser = new XmlPaser();
+//		String accinfo_xml = Seoul_traffic_api.traffic_API("AccInfo",1,100);
+//		ArrayList<Traffic_AccInfoDto> info = xmlPaser.Xml_Parsing(accinfo_xml,"accInfo",Traffic_AccInfoDto.class);
+//		model.addAttribute("accInfo", info);
+//		return "test2";
+//	}
+
+	@RequestMapping(value = "test2", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public ArrayList<Traffic_AccInfoDto> test2() {
 		MapServiceInter service = new MapService();
 		XmlPaser xmlPaser = new XmlPaser();
-		String accinfo_xml = Seoul_traffic_api.traffic_API("AccInfo",1,100);
-		ArrayList<Traffic_AccInfoDto> info = xmlPaser.Xml_Parsing(accinfo_xml,"accInfo",Traffic_AccInfoDto.class);
-		model.addAttribute("accInfo", info);
-		return "test2";
+		String accinfo_xml = Seoul_traffic_api.traffic_API("AccInfo", 1, 100);
+		ArrayList<Traffic_AccInfoDto> info = xmlPaser.Xml_Parsing(accinfo_xml, "accInfo", Traffic_AccInfoDto.class);
+		return info;
 	}
 
-	
 }
