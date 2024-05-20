@@ -570,9 +570,9 @@
 
 							<!-- Project Card Example -->
 							<div class="card shadow mb-4">
-								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">전체</h6>
-								</div>
+<%--								<div class="card-header py-3">--%>
+<%--									<h6 class="m-0 font-weight-bold text-primary">전체</h6>--%>
+<%--								</div>--%>
 								<div class="card-body">
 									<jsp:include page="test2.jsp" flush="false" />
 									<!-- <h4 class="small font-weight-bold">Server Migration <span

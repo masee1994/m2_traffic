@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import com.tech.m2.dto.Traffic_AccInfoDto;
 import com.tech.m2.dto.Traffic_RoadInfoDto;
 import com.tech.m2.dto.Traffic_SpotInfoDto;
 import com.tech.m2.service.MapService;
@@ -37,7 +38,7 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
 		String formattedDate = dateFormat.format(date);
-		
+
 		model.addAttribute("serverTime", formattedDate );
 
 		return "home";
@@ -55,5 +56,16 @@ public class HomeController {
 //		model.addAttribute("info", info);
 		return "test";
 	}
+
+	@RequestMapping(value = "test2", method = RequestMethod.GET)
+	public String test2(Model model) {
+		MapServiceInter service = new MapService();
+		XmlPaser xmlPaser = new XmlPaser();
+		String accinfo_xml = Seoul_traffic_api.traffic_API("AccInfo",1,100);
+		ArrayList<Traffic_AccInfoDto> info = xmlPaser.Xml_Parsing(accinfo_xml,"accInfo",Traffic_AccInfoDto.class);
+		model.addAttribute("accInfo", info);
+		return "test2";
+	}
+
 	
 }
