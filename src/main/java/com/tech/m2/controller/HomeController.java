@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import com.tech.m2.dto.Traffic_AccInfoDto;
 import com.tech.m2.dto.Traffic_RoadInfoDto;
 import com.tech.m2.dto.Traffic_SpotInfoDto;
 import com.tech.m2.service.MapService;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Handles requests for the application home page.
@@ -37,7 +39,7 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
 		String formattedDate = dateFormat.format(date);
-		
+
 		model.addAttribute("serverTime", formattedDate );
 
 		return "home";
@@ -55,5 +57,25 @@ public class HomeController {
 //		model.addAttribute("info", info);
 		return "test";
 	}
-	
+
+//	@RequestMapping(value = "test2", method = RequestMethod.GET)
+//	public String test2(Model model) {
+//		MapServiceInter service = new MapService();
+//		XmlPaser xmlPaser = new XmlPaser();
+//		String accinfo_xml = Seoul_traffic_api.traffic_API("AccInfo",1,100);
+//		ArrayList<Traffic_AccInfoDto> info = xmlPaser.Xml_Parsing(accinfo_xml,"accInfo",Traffic_AccInfoDto.class);
+//		model.addAttribute("accInfo", info);
+//		return "test2";
+//	}
+
+	@RequestMapping(value = "test2", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public ArrayList<Traffic_AccInfoDto> test2() {
+		MapServiceInter service = new MapService();
+		XmlPaser xmlPaser = new XmlPaser();
+		String accinfo_xml = Seoul_traffic_api.traffic_API("AccInfo", 1, 100);
+		ArrayList<Traffic_AccInfoDto> info = xmlPaser.Xml_Parsing(accinfo_xml, "accInfo", Traffic_AccInfoDto.class);
+		return info;
+	}
+
 }

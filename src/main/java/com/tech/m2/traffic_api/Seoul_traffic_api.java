@@ -35,7 +35,6 @@ public class Seoul_traffic_api {
             urlBuilder.append("/" + end_index);
             urlBuilder.append("/" + value);
             String xml_code = urlConnection(urlBuilder);
-            ;
             return xml_code;
 
         } catch (Exception e) {
@@ -43,6 +42,9 @@ public class Seoul_traffic_api {
         }
         return null;
     }
+
+
+
 
     private static String urlConnection(StringBuilder urlBuilder) {
         try {
