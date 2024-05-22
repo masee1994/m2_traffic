@@ -61,7 +61,7 @@
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item active" style="font-family: maple;"><a class="nav-link"
-				href="index.html"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>실시간
+				href="/"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>실시간
 						교통상황</span></a></li>
 
 			<!-- Divider -->
