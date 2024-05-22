@@ -29,7 +29,7 @@
         }
         .tab.active {
             background-color: white;
-            font-weight: normal;
+            font-weight: bold;
             border-top: 2px solid #007bff;
             border-left: 2px solid #ddd;
             border-right: 2px solid #ddd;
@@ -65,7 +65,7 @@
         }
         .list-group-item-heading {
             font-size: 18px;
-            font-weight: normal;
+            font-weight: bold;
             margin-bottom: 5px;
         }
         .date small {
