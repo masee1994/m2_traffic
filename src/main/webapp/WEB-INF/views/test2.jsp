@@ -72,23 +72,22 @@
             color: #6c757d;
         }
     </style>
-
 </head>
 <body>
 <div class="tab-container">
     <div class="tab active" data-tab="all">전체</div>
-    <div class="tab" data-tab="A01">사고</div>
-    <div class="tab" data-tab="A02">고장</div>
-    <div class="tab" data-tab="A03">집회</div>
-    <div class="tab" data-tab="A04">공사</div>
+    <div class="tab" data-tab="A01">사고/고장</div>
+    <div class="tab" data-tab="A02">공사</div>
+    <div class="tab" data-tab="A03">기상/화재</div>
+    <div class="tab" data-tab="A04">집회/행사</div>
 </div>
 
 <div id="accInfoContainer">
-    <div class="tab-content active" id="all"></div>
-    <div class="tab-content" id="A01"></div>
-    <div class="tab-content" id="A02"></div>
-    <div class="tab-content" id="A03"></div>
-    <div class="tab-content" id="A04"></div>
+    <div class="tab-content active" id="all"><p>Loading Traffic data...</p></div>
+    <div class="tab-content" id="A01"><p>Loading Traffic data...</p></div>
+    <div class="tab-content" id="A02"><p>Loading Traffic data...</p></div>
+    <div class="tab-content" id="A03"><p>Loading Traffic data...</p></div>
+    <div class="tab-content" id="A04"><p>Loading Traffic data...</p></div>
 </div>
 
 <script>
@@ -130,13 +129,13 @@
 
                 allContent += content;
 
-                if (dto.acc_type === 'A01') {
+                if (dto.acc_type === 'A01' || dto.acc_type === 'A02' || dto.acc_type === 'A03' || dto.acc_type === 'A05' || dto.acc_type === 'A06' || dto.acc_type === 'A07') {
                     a01Content += content;
-                } else if (dto.acc_type === 'A02') {
-                    a02Content += content;
-                } else if (dto.acc_type === 'A03') {
-                    a03Content += content;
                 } else if (dto.acc_type === 'A04') {
+                    a02Content += content;
+                } else if (dto.acc_type === 'A08' || dto.acc_type === 'A09') {
+                    a03Content += content;
+                } else if (dto.acc_type === 'A10') {
                     a04Content += content;
                 }
             });
@@ -166,6 +165,7 @@
                 },
                 error: function (error) {
                     console.error('Error fetching data', error);
+                    $('.tab-content').html('<p>Error fetching traffic data.</p>');
                 }
             });
         } else {

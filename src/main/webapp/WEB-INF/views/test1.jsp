@@ -5,29 +5,54 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<title>Insert title here</title>
+</head>
+<style>
+	/* 화살표 스타일 */
+	#arrow {
+		display: inline-block;
+		width: 0;
+		height: 0;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		border-bottom: 20px solid black;
+		transform: rotate(90deg); /* 기본 회전 방향 */
+	}
+	/* 화살표 회전 컨테이너 */
+	#arrow-container {
+		display: inline-block;
+		transform-origin: center center;
+		margin-left: 5px;
+	}
+</style>
 </head>
 <body>
-	<div>
-		20°C 맑음
-		<div>
-			미세먼지<br /> <span
-				style="border-radius: 5px; font-size: 16px; color: white; background-color: #0066ff;">&nbsp;&nbsp;&nbsp;좋음&nbsp;&nbsp;&nbsp;</span>
-		</div>
-	</div>
-	<div>
-		초미세먼지<br /> <span
-			style="border-radius: 5px; font-size: 16px; color: white; background-color: #0066ff;">&nbsp;&nbsp;&nbsp;좋음&nbsp;&nbsp;&nbsp;</span>
-	</div>
-	<div>
-		서울시 전체속도<br /> <span
-			style="border-radius: 5px; border: 2px solid black; background-color: #FFC702; color: black; font-size: 18px;">&nbsp;&nbsp;&nbsp;서행&nbsp;&nbsp;&nbsp;</span>
-		19.7km/h
-	</div>
-	<div>
-		도심 전체속도<br /> <span
-			style="border-radius: 5px; border: 2px solid black; background-color: #E5595A; color: black; font-size: 18px;">&nbsp;&nbsp;&nbsp;정체&nbsp;&nbsp;&nbsp;</span>
-		13.9km/h
-	</div>
+<div id="weather-info">
+	<p>Loading weather data...</p>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$.ajax({
+			url: 'test1',
+			method: 'GET',
+			dataType: 'json',
+			success: function(data) {
+				$('#weather-info').html(
+						'<p>날씨 : ' + data.weatherDescription + ' (' + data.weatherMain + ')</p>' +
+						'<p>기온 : ' + data.tempCelsius + ' °C</p>' +
+						'<p>풍속 : ' + data.windSpeed + ' m/s</p>' +
+						'<p>풍량 : ' + data.windDeg + '° <span id="arrow-container"><span id="arrow"></span></span></p>'
+				);
+				$('#arrow-container').css('transform', 'rotate(' + data.windDeg + 'deg)');
+			},
+			error: function(xhr, status, error) {
+				$('#weather-info').html('<p>Error fetching weather data.</p>');
+			}
+		});
+	});
+</script>
 </body>
 </html>

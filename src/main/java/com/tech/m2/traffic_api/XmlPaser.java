@@ -3,9 +3,12 @@ package com.tech.m2.traffic_api;
 import com.tech.m2.dto.DestPositonDto;
 import com.tech.m2.dto.Traffic_AccInfoDto;
 import com.tech.m2.dto.Traffic_SpotInfoDto;
+import com.tech.m2.dto.WeatherDto;
 import org.geotools.geometry.DirectPosition2D;
 import org.geotools.referencing.CRS;
 import org.geotools.referencing.ReferencingFactoryFinder;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.opengis.referencing.crs.CRSFactory;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
@@ -21,7 +24,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 
 public class XmlPaser {
-    public <T> ArrayList<T> Xml_Parsing(String data,String object, Class<T> tClass) {
+    public <T> ArrayList<T> Traffic_Xml_Parsing(String data, String object, Class<T> tClass) {
         ArrayList<T> dtos = new ArrayList<>();
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -113,6 +116,59 @@ public class XmlPaser {
         }
 
         return dtos;
+    }
+
+
+
+
+    public WeatherDto Weather_Xml_Parsing(String data) {
+        WeatherDto dto = new WeatherDto();
+        // JSON 파싱
+        JSONObject jsonObject = new JSONObject(data);
+
+        // 날씨 정보 추출
+        JSONArray weatherArray = jsonObject.getJSONArray("weather");
+        JSONObject weatherObject = weatherArray.getJSONObject(0);
+        String weatherMain = weatherObject.getString("main");
+        String weatherDescription = weatherObject.getString("description");
+
+        // 온도 정보 추출 및 섭씨로 변환
+        JSONObject mainObject = jsonObject.getJSONObject("main");
+        double tempKelvin = mainObject.getDouble("temp");
+        double tempCelsius = Math.round(kelvinToCelsius(tempKelvin)*100)/100;
+
+        // 풍향 및 풍속 정보 추출
+        JSONObject windObject = jsonObject.getJSONObject("wind");
+        double windSpeed = windObject.getDouble("speed");
+        int windDeg = windObject.getInt("deg");
+
+        // 출력
+        System.out.println("날씨: " + weatherMain + " (" + weatherDescription + ")");
+        System.out.println("온도: " + tempCelsius + " °C");
+        System.out.println("풍속: " + windSpeed + " m/s");
+        System.out.println("풍량: " + getWindDirection(windDeg) + "°");
+
+        dto.setWeatherMain(weatherMain);
+        dto.setWeatherDescription(weatherDescription);
+        dto.setTempCelsius(Double.toString(tempCelsius));
+        dto.setWindSpeed(Double.toString(windSpeed));
+        dto.setWindDeg_origin(Integer.toString(windDeg));
+        dto.setWindDeg(getWindDirection(windDeg));
+
+        return dto;
+    }
+
+    private static double kelvinToCelsius(double kelvin) {
+        return kelvin - 273.15;
+    }
+
+    private static String getWindDirection(int degrees) {
+        String[] directions = {
+                "북", "북북동", "북동", "동북동", "동", "동남동", "남동", "남남동",
+                "남", "남남서", "남서", "서남서", "서", "서북서", "북서", "북북서"
+        };
+        int index = (int)((degrees + 11.25) / 22.5);
+        return directions[index % 16];
     }
 
     //        if (dtos.get(0).getChk() == -1) {
