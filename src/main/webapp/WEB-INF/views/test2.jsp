@@ -14,25 +14,26 @@
     <style>
         .tab-container {
             display: flex;
-            border-bottom: 2px solid #ddd;
-            margin-bottom: 0; /* margin-bottom 제거 */
+            /* border-bottom: 1px solid #ddd; */
+            /* margin-bottom: 0; /* margin-bottom 제거 */ */
         }
         .tab {
             padding: 10px 20px;
             cursor: pointer;
-            border: 1px solid #ddd;
+            /* border: 1px solid #ddd; */
             border-bottom: none;
             background-color: #f8f9fc;
-            margin-right: 5px;
+            /* margin-right: 5px; */
             font-weight: lighter;
             color: #6c757d;
+            border-radius: 5px;
         }
         .tab.active {
             background-color: white;
             font-weight: bold;
-            border-top: 2px solid #007bff;
-            border-left: 2px solid #ddd;
-            border-right: 2px solid #ddd;
+            border-top: 1px solid #007bff;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
             border-bottom: none; /* border-bottom 변경 */
             color: #007bff;
         }
@@ -41,12 +42,14 @@
             max-height: 400px; /* 원하는 높이 설정 */
             overflow-y: auto; /* 스크롤바 추가 */
             border: 1px solid #ddd; /* Border to match tab border */
-            border-top: none; /* Remove top border to connect with tabs */
+            /* border-top: none; /* Remove top border to connect with tabs */ */
             padding: 10px;
             background-color: white; /* Background color to match tabs */
         }
         .tab-content.active {
             display: block;
+            border-radius: 5px;
+            
         }
         .icon-box img {
             width: 20px;

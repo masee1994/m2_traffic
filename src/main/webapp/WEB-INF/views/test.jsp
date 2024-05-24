@@ -75,7 +75,7 @@
                         });
 
                         var infowindow = new kakao.maps.InfoWindow({
-                            content: '<div style="padding:5px;">' + dto.acc_info +'</div>' // 인포윈도우에 표시될 내용
+                            content: '<div style="padding:5px; color: white; background-color: black;">' + dto.acc_info +'</div>' // 인포윈도우에 표시될 내용
                         });
 
                         marker.setMap(map); // 마커를 지도에 표시

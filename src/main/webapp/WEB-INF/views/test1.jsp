@@ -17,7 +17,7 @@
 		height: 0;
 		border-left: 10px solid transparent;
 		border-right: 10px solid transparent;
-		border-bottom: 20px solid black;
+		border-bottom: 20px solid #333333;
 		transform: rotate(90deg); /* 기본 회전 방향 */
 	}
 	/* 화살표 회전 컨테이너 */
@@ -41,10 +41,10 @@
 			dataType: 'json',
 			success: function(data) {
 				$('#weather-info').html(
-						'<p>날씨 : ' + data.weatherDescription + ' (' + data.weatherMain + ')</p>' +
-						'<p>기온 : ' + data.tempCelsius + ' °C</p>' +
-						'<p>풍속 : ' + data.windSpeed + ' m/s</p>' +
-						'<p>풍량 : ' + data.windDeg + '° <span id="arrow-container"><span id="arrow"></span></span></p>'
+						'<p>날씨 : <strong style="color: #4E73DF">' + data.weatherDescription + ' (' + data.weatherMain + ')</strong></p>' +
+						'<p>기온 : <strong style="color: #FF0000">' + data.tempCelsius + ' °C</strong></p>' +
+						'<p>풍속 : <strong style="color: #008000">' + data.windSpeed + ' m/s</strong></p>' +
+						'<p>풍량 : <strong style="color: #FFA500">' + data.windDeg + '° <span id="arrow-container"><span id="arrow"></span></span></strong></p>'
 				);
 				$('#arrow-container').css('transform', 'rotate(' + data.windDeg + 'deg)');
 			},
