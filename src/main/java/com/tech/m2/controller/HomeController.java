@@ -64,16 +64,13 @@ public class HomeController {
 		return "home";
 	}
 
-	@RequestMapping(value = "busTab", method = RequestMethod.GET)
+	@RequestMapping(value = "bushome", method = RequestMethod.GET)
 	public String busTab(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 
-		BusStopDao busStopDao = sqlSession.getMapper(BusStopDao.class);
 
 
-
-
-		return "home2";
+		return "bushome";
 	}
 //	@RequestMapping(value = "test", method = RequestMethod.GET)
 //	public String test(Model model) {
@@ -140,8 +137,19 @@ public class HomeController {
 //		System.out.println(dto.get(0).getdPy_latitude());
 //		System.out.println("---------------------------");
 
-
 		return weather_data;
+	}
+
+
+
+	@RequestMapping(value = "bustest", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public ArrayList<BusInfoDto> bustest() {
+		BusStopDao busStopDao = sqlSession.getMapper(BusStopDao.class);
+		MapServiceInter service = new MapService();
+		XmlPaser xmlPaser = new XmlPaser();
+		ArrayList<BusInfoDto> dto = busStopDao.getInfo();
+		return dto;
 	}
 
 }

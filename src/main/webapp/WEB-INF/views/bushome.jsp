@@ -64,7 +64,7 @@
 				href="/"> <i class="fa-solid fa-map-location-dot"></i> <span>실시간
 						교통상황</span></a></li>
 			<li class="nav-item active" style="font-family: maple;"><a class="nav-link"
-				href="bushome"> <i class="fa-solid fa-bus-simple"></i> <span>버스
+				href="index.html"> <i class="fa-solid fa-bus-simple"></i> <span>버스
 				</span></a></li>
 			<li class="nav-item active" style="font-family: maple;"><a class="nav-link"
 				href="index.html"> <i class="fa-solid fa-video"></i> <span>CCTV
@@ -495,7 +495,7 @@
 								<div
 									class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 									<h6 class="m-0 font-weight-bold text-primary"></h6>
-									<jsp:include page="test.jsp" flush="false" />
+									<jsp:include page="bustest.jsp" flush="false" />
 									<!-- <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -567,18 +567,18 @@
 					</div>
 
 					<!-- Content Row -->
-					<div class="row">
+<%--					<div class="row">--%>
 
 						<!-- Content Column -->
-						<div class="col-lg-6 mb-4" style="font-family: maple; font-size: 20px;">
+<%--						<div class="col-lg-6 mb-4" style="font-family: maple; font-size: 20px;">--%>
 
 							<!-- Project Card Example -->
-							<div class="card shadow mb-4">
+<%--							<div class="card shadow mb-4">--%>
 <%--								<div class="card-header py-3">--%>
 <%--									<h6 class="m-0 font-weight-bold text-primary">전체</h6>--%>
 <%--								</div>--%>
-								<div class="card-body">
-									<jsp:include page="test2.jsp" flush="false" />
+<%--								<div class="card-body">--%>
+<%--									<jsp:include page="test2.jsp" flush="false" />--%>
 									<!-- <h4 class="small font-weight-bold">Server Migration <span
                                             class="float-right">20%</span></h4>
                                     <div class="progress mb-4">
@@ -609,8 +609,8 @@
                                         <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
                                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div> -->
-								</div>
-							</div>
+<%--								</div>--%>
+<%--							</div>--%>
 
 							<!-- Color System -->
 							<!-- <div class="row">
@@ -680,16 +680,16 @@
                                 </div>
                             </div> -->
 
-						</div>
-						<div class="col-lg-6 mb-4" style="font-family: maple; font-size: 20px;">
+<%--						</div>--%>
+<%--						<div class="col-lg-6 mb-4" style="font-family: maple; font-size: 20px;">--%>
 
 							<!-- Project Card Example -->
-							<div class="card shadow mb-4">
-								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">범례</h6>
-								</div>
-								<div class="card-body">
-									<jsp:include page="test3.jsp" flush="false" />
+<%--							<div class="card shadow mb-4">--%>
+<%--								<div class="card-header py-3">--%>
+<%--									<h6 class="m-0 font-weight-bold text-primary">범례</h6>--%>
+<%--								</div>--%>
+<%--								<div class="card-body">--%>
+<%--									<jsp:include page="test3.jsp" flush="false" />--%>
 									<!-- <h4 class="small font-weight-bold">Server Migration <span
                                             class="float-right">20%</span></h4>
                                     <div class="progress mb-4">
@@ -720,8 +720,8 @@
                                         <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
                                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div> -->
-								</div>
-							</div>
+<%--								</div>--%>
+<%--							</div>--%>
 
 							<!-- Color System -->
 							<!-- <div class="row">
@@ -791,7 +791,7 @@
                                 </div>
                             </div> -->
 
-						</div>
+<%--						</div>--%>
 
 						<!-- <div class="col-lg-6 mb-4">
 
