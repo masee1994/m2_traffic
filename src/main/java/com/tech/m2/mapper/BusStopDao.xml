@@ -2,5 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
+<mapper namespace="com.tech.m2.dao.BusStopDao">
+    <select id="getInfo"
+            resultType="com.tech.m2.dto.BusInfoDto">
+        SELECT * FROM BUS_STOP
+    </select>
 </mapper>

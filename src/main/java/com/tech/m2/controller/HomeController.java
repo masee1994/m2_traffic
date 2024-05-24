@@ -5,14 +5,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import com.tech.m2.dao.BusStopDao;
+import com.tech.m2.dto.BusInfoDto;
 import com.tech.m2.dto.Traffic_AccInfoDto;
 import com.tech.m2.dto.WeatherDto;
 import com.tech.m2.service.MapService;
 import com.tech.m2.serviceInter.MapServiceInter;
 import com.tech.m2.traffic_api.Seoul_traffic_api;
 import com.tech.m2.traffic_api.XmlPaser;
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +31,9 @@ import static com.tech.m2.traffic_api.Seoul_traffic_api.weather_API;
  */
 @Controller
 public class HomeController {
-	
+
+	@Autowired
+	private SqlSession sqlSession;
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
@@ -41,10 +47,33 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
 		String formattedDate = dateFormat.format(date);
-
+		model.addAttribute("sqlSession", sqlSession);
 		model.addAttribute("serverTime", formattedDate );
 
+		BusStopDao busStopDao = sqlSession.getMapper(BusStopDao.class);
+		ArrayList<BusInfoDto> dto = busStopDao.getInfo();
+		System.out.println("---------------------------");
+		System.out.println("버스정류장 정보");
+		System.out.println(dto.get(0).getARS_ID());
+		System.out.println(dto.get(0).getName());
+		System.out.println(dto.get(0).getdPx_longitude());
+		System.out.println(dto.get(0).getdPy_latitude());
+		System.out.println("---------------------------");
+
+
 		return "home";
+	}
+
+	@RequestMapping(value = "busTab", method = RequestMethod.GET)
+	public String busTab(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+
+		BusStopDao busStopDao = sqlSession.getMapper(BusStopDao.class);
+
+
+
+
+		return "home2";
 	}
 //	@RequestMapping(value = "test", method = RequestMethod.GET)
 //	public String test(Model model) {
@@ -101,6 +130,17 @@ public class HomeController {
 		XmlPaser xmlPaser = new XmlPaser();
 		WeatherDto weather_data = new WeatherDto();
 		weather_data = xmlPaser.Weather_Xml_Parsing(weather_API());
+//		BusStopDao busStopDao = sqlSession.getMapper(BusStopDao.class);
+//		ArrayList<BusInfoDto> dto = busStopDao.getInfo();
+//		System.out.println("---------------------------");
+//		System.out.println("버스정류장 정보");
+//		System.out.println(dto.get(0).getARS_ID());
+//		System.out.println(dto.get(0).getName());
+//		System.out.println(dto.get(0).getdPx_longitude());
+//		System.out.println(dto.get(0).getdPy_latitude());
+//		System.out.println("---------------------------");
+
+
 		return weather_data;
 	}
 

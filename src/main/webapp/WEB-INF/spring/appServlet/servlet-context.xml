@@ -24,26 +24,25 @@
 	<!-- <context:component-scan base-package="com.tech.m2" /> -->
 	<context:component-scan base-package="com.tech.m2.controller"/>
 	
-	<!-- mybatis setting -->
-<!--    <beans:bean name="dataSource"-->
-<!--                class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-<!--        <beans:property name="driverClassName"-->
-<!--                        value="oracle.jdbc.driver.OracleDriver"/>-->
-<!--        <beans:property name="url"-->
-<!--                        value="jdbc:oracle:thin:@localhost:1521:xe"/>-->
-<!--        <beans:property name="username" value="hr"/>-->
-<!--        <beans:property name="password" value="123456"/>-->
-<!--    </beans:bean>-->
-<!--    <beans:bean id="sqlSessionFactory"-->
-<!--                class="org.mybatis.spring.SqlSessionFactoryBean">-->
-<!--        <beans:property name="dataSource" ref="dataSource"/>-->
-<!--        <beans:property name="mapperLocations"-->
-<!--                        value="classpath:com/tech/m2/mapper/*.xml"/>-->
-<!--    </beans:bean>-->
-<!--    <beans:bean id="sqlSession"-->
-<!--                class="org.mybatis.spring.SqlSessionTemplate">-->
-<!--        <beans:constructor-arg index="0"-->
-<!--                               ref="sqlSessionFactory"></beans:constructor-arg>-->
-<!--    </beans:bean>-->
+<!--	 mybatis setting -->
+    <beans:bean name="dataSource"
+                class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <beans:property name="driverClassName"
+                        value="oracle.jdbc.driver.OracleDriver"/>
+        <beans:property name="url"
+                        value="jdbc:oracle:thin:@localhost:1521:xe"/>
+        <beans:property name="username" value="hr"/>
+        <beans:property name="password" value="123456"/>
+    </beans:bean>
+    <beans:bean id="sqlSessionFactory"
+                class="org.mybatis.spring.SqlSessionFactoryBean">
+        <beans:property name="dataSource" ref="dataSource"/>
+        <beans:property name="mapperLocations" value="classpath:com/tech/m2/mapper/*.xml"/>
+    </beans:bean>
+    <beans:bean id="sqlSession"
+                class="org.mybatis.spring.SqlSessionTemplate">
+        <beans:constructor-arg index="0"
+                               ref="sqlSessionFactory"></beans:constructor-arg>
+    </beans:bean>
 	
 </beans:beans>
