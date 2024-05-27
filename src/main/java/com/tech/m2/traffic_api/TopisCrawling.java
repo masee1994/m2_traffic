@@ -56,6 +56,10 @@ public class TopisCrawling {
 
 
     public Map<String, String> getTrafficStats() {
+
+        /*맥->윈도우 경로 바꾸시면 됩니다.
+        https://googlechromelabs.github.io/chrome-for-testing/
+        크롬 업데이트 + 버전에 맞는거 다운 받으세요*/
         System.setProperty("webdriver.chrome.driver", "/Users/hanseulma/Documents/chromedriver-mac-arm64/chromedriver");
 
         // ChromeOptions 설정
