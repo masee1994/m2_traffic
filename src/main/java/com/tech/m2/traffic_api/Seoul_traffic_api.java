@@ -4,7 +4,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 
-
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.jsoup.Jsoup;
@@ -14,8 +13,6 @@ import org.jsoup.nodes.Element;
 import javax.net.ssl.*;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
-
-
 
 
 import java.io.BufferedReader;
@@ -30,6 +27,7 @@ import java.security.NoSuchAlgorithmException;
 public class Seoul_traffic_api {
     private final static String api_Key = "6841425a536d617338336462594277";
     private final static String weather_api_Key = "62a6ff71e40cfec955c8d238ea994743";
+    private final static String cctv_api_Key = "dacc0eeebe5d4230ac1e5664c7ed51f3";
 
     public static String traffic_API(String service, int start_index, int end_index) {
         try {
@@ -68,8 +66,8 @@ public class Seoul_traffic_api {
 
     public static String weather_API() {
         try {
-            String city="seoul,kr";
-            String language="kr";
+            String city = "seoul,kr";
+            String language = "kr";
             StringBuilder urlBuilder = new StringBuilder("http://api.openweathermap.org/data/2.5/weather"); /*URL*/
             urlBuilder.append("?" + URLEncoder.encode("q", "UTF-8") + "=" + city);
             urlBuilder.append("&" + URLEncoder.encode("lang", "UTF-8") + "=" + language);
@@ -84,15 +82,21 @@ public class Seoul_traffic_api {
     }
 //    http://api.openweathermap.org/data/2.5/weather?q=seoul,kr&lang=kr&APPID=62a6ff71e40cfec955c8d238ea994743
 
-    public static String Traffic_crawling(){
-        String data="";
+    public static String Traffic_crawling() {
+        String data = "";
         try {
             // 모든 SSL 인증서를 신뢰하도록 설정
             TrustManager[] trustAllCerts = new TrustManager[]{
                     new X509TrustManager() {
-                        public X509Certificate[] getAcceptedIssuers() { return null; }
-                        public void checkClientTrusted(X509Certificate[] certs, String authType) { }
-                        public void checkServerTrusted(X509Certificate[] certs, String authType) { }
+                        public X509Certificate[] getAcceptedIssuers() {
+                            return null;
+                        }
+
+                        public void checkClientTrusted(X509Certificate[] certs, String authType) {
+                        }
+
+                        public void checkServerTrusted(X509Certificate[] certs, String authType) {
+                        }
                     }
             };
 
@@ -142,6 +146,27 @@ public class Seoul_traffic_api {
         return data;
     }
 
+
+    public static String CCTV_api(String type) {
+        try {
+            StringBuilder urlBuilder = new StringBuilder("https://openapi.its.go.kr:9443/cctvInfo"); /*URL*/
+            urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + cctv_api_Key); /*Service Key*/
+            urlBuilder.append("&" + URLEncoder.encode("type", "UTF-8") + "=" + type);
+            urlBuilder.append("&" + URLEncoder.encode("cctvType", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
+            urlBuilder.append("&" + URLEncoder.encode("minX", "UTF-8") + "=" + URLEncoder.encode("126.734086", "UTF-8"));
+            urlBuilder.append("&" + URLEncoder.encode("maxX", "UTF-8") + "=" + URLEncoder.encode("127.269311", "UTF-8"));
+            urlBuilder.append("&" + URLEncoder.encode("minY", "UTF-8") + "=" + URLEncoder.encode("37.413294", "UTF-8"));
+            urlBuilder.append("&" + URLEncoder.encode("maxY", "UTF-8") + "=" + URLEncoder.encode("37.715133", "UTF-8"));
+            urlBuilder.append("&" + URLEncoder.encode("getType", "UTF-8") + "=" + URLEncoder.encode("xml", "UTF-8"));
+            String xml_code = urlConnection(urlBuilder);
+            return xml_code;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
+
+    }
 
 
     private static String urlConnection(StringBuilder urlBuilder) {

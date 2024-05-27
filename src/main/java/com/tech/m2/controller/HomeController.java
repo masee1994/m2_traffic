@@ -4,14 +4,17 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
 import com.tech.m2.dao.BusStopDao;
 import com.tech.m2.dto.BusInfoDto;
+import com.tech.m2.dto.CctvDto;
 import com.tech.m2.dto.Traffic_AccInfoDto;
 import com.tech.m2.dto.WeatherDto;
 import com.tech.m2.service.MapService;
 import com.tech.m2.serviceInter.MapServiceInter;
 import com.tech.m2.traffic_api.Seoul_traffic_api;
+import com.tech.m2.traffic_api.TopisCrawling;
 import com.tech.m2.traffic_api.XmlPaser;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -23,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import static com.tech.m2.traffic_api.Seoul_traffic_api.Traffic_crawling;
 import static com.tech.m2.traffic_api.Seoul_traffic_api.weather_API;
 
 /**
@@ -71,6 +73,15 @@ public class HomeController {
 
 
 		return "bushome";
+	}
+
+	@RequestMapping(value = "cctvhome", method = RequestMethod.GET)
+	public String cctvTab(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+
+
+
+		return "cctvhome";
 	}
 //	@RequestMapping(value = "test", method = RequestMethod.GET)
 //	public String test(Model model) {
@@ -127,16 +138,6 @@ public class HomeController {
 		XmlPaser xmlPaser = new XmlPaser();
 		WeatherDto weather_data = new WeatherDto();
 		weather_data = xmlPaser.Weather_Xml_Parsing(weather_API());
-//		BusStopDao busStopDao = sqlSession.getMapper(BusStopDao.class);
-//		ArrayList<BusInfoDto> dto = busStopDao.getInfo();
-//		System.out.println("---------------------------");
-//		System.out.println("버스정류장 정보");
-//		System.out.println(dto.get(0).getARS_ID());
-//		System.out.println(dto.get(0).getName());
-//		System.out.println(dto.get(0).getdPx_longitude());
-//		System.out.println(dto.get(0).getdPy_latitude());
-//		System.out.println("---------------------------");
-
 		return weather_data;
 	}
 
@@ -151,5 +152,29 @@ public class HomeController {
 		ArrayList<BusInfoDto> dto = busStopDao.getInfo();
 		return dto;
 	}
+
+	@RequestMapping(value = "cctvtest", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public ArrayList<CctvDto> cctvtest() {
+		BusStopDao busStopDao = sqlSession.getMapper(BusStopDao.class);
+		MapServiceInter service = new MapService();
+		XmlPaser xmlPaser = new XmlPaser();
+		String cctv_xml_ex = Seoul_traffic_api.CCTV_api("ex");
+		System.out.println(cctv_xml_ex);
+		ArrayList<CctvDto> dto = xmlPaser.cctv_parse(cctv_xml_ex);
+		String cctv_xml_its = Seoul_traffic_api.CCTV_api("its");
+		dto.addAll(xmlPaser.cctv_parse(cctv_xml_its));
+		return dto;
+	}
+
+	@RequestMapping(value = "trafficStats", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public Map<String, String> getTrafficStats() {
+		TopisCrawling crawlingService = new TopisCrawling();
+		Map<String, String> trafficStats = crawlingService.getTrafficStats();
+		return trafficStats;
+	}
+
+
 
 }

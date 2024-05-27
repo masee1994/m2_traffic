@@ -64,10 +64,10 @@
 				href="/"> <i class="fa-solid fa-map-location-dot"></i> <span>실시간
 						교통상황</span></a></li>
 			<li class="nav-item active" style="font-family: maple;"><a class="nav-link"
-				href="index.html"> <i class="fa-solid fa-bus-simple"></i> <span>버스
+				href="bushome"> <i class="fa-solid fa-bus-simple"></i> <span>버스
 				</span></a></li>
 			<li class="nav-item active" style="font-family: maple;"><a class="nav-link"
-				href="index.html"> <i class="fa-solid fa-video"></i> <span>CCTV
+				href="cctvhome"> <i class="fa-solid fa-video"></i> <span>CCTV
 				</span></a></li>
 			<li class="nav-item active" style="font-family: maple;"><a class="nav-link"
 				href="index.html"> <i class="fa-solid fa-chart-simple"></i> <span>통계
