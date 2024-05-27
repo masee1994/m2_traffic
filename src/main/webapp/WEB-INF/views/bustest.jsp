@@ -11,6 +11,7 @@
         .control { position: absolute; top: 10px; right: 10px; z-index: 5; }
         .button { padding: 5px 10px; background-color: white; border: 1px solid #e3e6f0; cursor: pointer; border-radius: 6px; }
         .button:hover { background-color: #f8f8f8; }
+        .custom-overlay { background: black; color: white; padding: 5px; border-radius: 3px; }
     </style>
 </head>
 <body>
@@ -62,44 +63,54 @@
             method: 'GET',
             dataType: 'json',
             success: function(data) {
+                var existingMarkers = {}; // 마커 위치를 저장할 객체
+
                 data.forEach(function(dto) {
-                    if(dto.dPx_longitude && dto.dPy_latitude) {
+                    if (dto.dPx_longitude && dto.dPy_latitude && dto.name) {
                         var markerPosition = new kakao.maps.LatLng(dto.dPy_latitude, dto.dPx_longitude);
-                        var markerImageUrl = "resources/img/busicon.png";
-                        var markerImageSize = new kakao.maps.Size(20, 20); // 마커 이미지 크기
-                        var markerImage = new kakao.maps.MarkerImage(markerImageUrl, markerImageSize);
+                        var markerKey = markerPosition.toString();
 
-                        var marker = new kakao.maps.Marker({
-                            position: markerPosition,
-                            image: markerImage
-                        });
+                        // 중복된 마커 위치인지 확인
+                        if (!existingMarkers[markerKey]) {
+                            existingMarkers[markerKey] = true;
 
-                        var infowindow = new kakao.maps.InfoWindow({
-                            content: '<div style="padding:5px; color: white; background-color: black;">' + dto.name +'</div>' // 인포윈도우에 표시될 내용
-                        });
+                            var markerImageUrl = "resources/img/busicon.png";
+                            var markerImageSize = new kakao.maps.Size(20, 20); // 마커 이미지 크기
+                            var markerImage = new kakao.maps.MarkerImage(markerImageUrl, markerImageSize);
 
-                        marker.setMap(map); // 마커를 지도에 표시
+                            var marker = new kakao.maps.Marker({
+                                position: markerPosition,
+                                image: markerImage
+                            });
 
-                        var isInfowindowOpen = false; // 인포윈도우가 열려있는지 상태를 저장하는 변수
-                        kakao.maps.event.addListener(marker, 'click', function() {
-                            if (isInfowindowOpen) {
+                            var infowindowContent = '<div class="custom-overlay">' + dto.name + '</div>';
+                            var infowindow = new kakao.maps.InfoWindow({
+                                content: infowindowContent // 인포윈도우에 표시될 내용
+                            });
+
+                            marker.setMap(map); // 마커를 지도에 표시
+
+                            // 마커에 마우스를 올렸을 때
+                            kakao.maps.event.addListener(marker, 'mouseover', function () {
                                 infowindow.close();
-                            } else {
                                 infowindow.open(map, marker);
-                            }
-                            isInfowindowOpen = !isInfowindowOpen; // 상태를 반전
-                        });
+                            });
+
+                            // 마커에서 마우스를 뗐을 때
+                            kakao.maps.event.addListener(marker, 'mouseout', function () {
+                                infowindow.close();
+                            });
+                        }
                     }
                 });
             },
-            error: function(error) {
+            error: function (error) {
                 console.error('Error fetching data', error);
             }
         });
     }
 
-
-    $(document).ready(function() {
+    $(document).ready(function () {
         fetchData(); // 페이지 로드 시 데이터 가져오기
     });
 </script>
